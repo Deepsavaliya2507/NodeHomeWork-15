@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const { Token } = require("../models");
 const config = require("../config/config");
 
@@ -11,7 +12,7 @@ const generateToken = async (reqBody) => {
     ...reqBody,
     expire_time: reqBody.expire_time.unix(),
   };
-
+  return jwt.sign(payload, config.jwt.secret_key);
 };
 
 /**
